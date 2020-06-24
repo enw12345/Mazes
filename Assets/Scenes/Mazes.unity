@@ -157,7 +157,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.22272162, g: 0.7264151, b: 0.7264151, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -197,13 +197,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280459239}
-  m_LocalRotation: {x: -0.0029873739, y: 0.9098531, z: -0.41486812, w: -0.0065497067}
-  m_LocalPosition: {x: 0.11, y: 9.62, z: 7.92}
+  m_LocalRotation: {x: 0, y: 0.9063079, z: -0.42261827, w: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 180, z: 0}
 --- !u!1 &458037733
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,9 +233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d174f162a4e564d40913b1d95ce4dc4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizeX: 10
-  sizeY: 10
-  top: -4.5
+  sizeX: 4
+  sizeY: 4
+  top: -1.5
   maze: {fileID: 458037735}
   wall: {fileID: 4189424659764275432, guid: 57c320cdd9bdbb44e8c5eb5fd5fd059d, type: 3}
 --- !u!4 &458037735

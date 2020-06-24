@@ -12,12 +12,11 @@ public class GenerateMaze : MonoBehaviour
     public GameObject wall;
     private Bounds wallBounds;
 
+    public enum MazeTypes { Binary};
     // Start is called before the first frame update
     void Awake()
     {
         wallBounds = wall.GetComponent<MeshFilter>().sharedMesh.bounds;
-        //wallBounds = wall.GetComponent<MeshRenderer>().bounds;
-        //wallBounds = wall.GetComponent<BoxCollider>().bounds;
     }
 
     // Update is called once per frame
