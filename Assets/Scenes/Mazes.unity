@@ -157,7 +157,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 1, g: 0.65599614, b: 0.2688679, a: 0}
+  m_BackGroundColor: {r: 0.22272162, g: 0.7264151, b: 0.7264151, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -198,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 280459239}
   m_LocalRotation: {x: -0.0029873739, y: 0.9098531, z: -0.41486812, w: -0.0065497067}
-  m_LocalPosition: {x: 0.10094872, y: 8.57371, z: 7.011861}
+  m_LocalPosition: {x: 0.11, y: 9.62, z: 7.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -233,9 +233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d174f162a4e564d40913b1d95ce4dc4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizeX: 6
-  sizeY: 6
-  top: -4
+  sizeX: 10
+  sizeY: 10
+  top: -4.5
   maze: {fileID: 458037735}
   wall: {fileID: 4189424659764275432, guid: 57c320cdd9bdbb44e8c5eb5fd5fd059d, type: 3}
 --- !u!4 &458037735
@@ -376,18 +376,18 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.96893704, b: 0.7882353, a: 1}
-  m_Intensity: 1
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
     m_Bias: 0.05
-    m_NormalBias: 0.4
+    m_NormalBias: 0
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
       e00: 1
@@ -433,7 +433,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692207490}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0.22, y: 3.53, z: -0.38}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

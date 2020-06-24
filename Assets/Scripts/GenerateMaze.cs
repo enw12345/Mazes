@@ -13,9 +13,11 @@ public class GenerateMaze : MonoBehaviour
     private Bounds wallBounds;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        wallBounds = wall.GetComponent<MeshRenderer>().bounds;
+        wallBounds = wall.GetComponent<MeshFilter>().sharedMesh.bounds;
+        //wallBounds = wall.GetComponent<MeshRenderer>().bounds;
+        //wallBounds = wall.GetComponent<BoxCollider>().bounds;
     }
 
     // Update is called once per frame
