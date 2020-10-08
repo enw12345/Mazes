@@ -15,59 +15,94 @@ public class SidewinderMazeAlgorithm : IMazeAlgorithm
 
     public void GenerateMaze()
     {
-        throw new System.NotImplementedException();
-    }
-
-    public IEnumerator GenerateMazeStep(float stepSpeed)
-    {
-        //start at a random cell in the western most column
-        //Cell startCell = Cell.Maze[Random.Range(Cell.Maze.Count - MazeBase.cellCountX, Cell.Maze.Count - 1)];
+        int start = (Cell.Maze.Count) - Grid.cellCountX;
 
         //start at the first cell in the western most column
         for (int i = 0; i < Grid.cellCountY; i++)
         {
             //go through the grid row by row
-            for (int j = ((Cell.Maze.Count - 1) - Grid.cellCountX); j >= 0; j -= Grid.cellCountX)
+            for (int j = start; j > -4; j -= Grid.cellCountX)
             {
-                int index = (Cell.Maze.Count - 1) - j + i;
-                Cell currentCell = Cell.Maze[index];
+                Debug.Log(j + i);
+                Cell currentCell = Cell.Maze[j + i];
 
-                if (currentCell.CellIndex == Vector2.zero)
+                // go through and remove each wall
+                int toRemove = Random.Range(0, 101);
+                if (currentCell.visited == false)
                 {
-                    yield return new WaitForSeconds(stepSpeed);
-                }
-                else if (currentCell.CellIndex.x == 0)
-                {
-                    currentCell.northWall.GetComponent<MeshRenderer>().material.color = Color.red;
-                    yield return new WaitForSeconds(stepSpeed);
-                    RemoveWall(currentCell.northWall);
-                }
-                else if (currentCell.CellIndex.y == 0)
-                {
-                    currentCell.eastWall.GetComponent<MeshRenderer>().material.color = Color.red;
-                    yield return new WaitForSeconds(stepSpeed);
-                    RemoveWall(currentCell.eastWall);
-                }
-                else
-                {
-                    // go through and remove each wall
-                    int toRemove = Random.Range(0, 101);
-                    if (toRemove < 50)
+                    //If we are at the end of a row we close the run or we randomly close the run.
+                    if (currentCell.CellIndex.y == 0 && currentCell.CellIndex.x != 0)
                     {
-                        Debug.Log("Carving east");
-                        //add cell to the run and remove the eastwall
+                        RemoveWall(currentCell.eastWall);
+                    }
+                    else
+                    {
+                        if (currentCell.CellIndex.x == 0 && currentCell.CellIndex.y != 0 || currentCell.CellIndex.y != 0 && toRemove < 50)
+                        {
+                            Cell randomCell;
+
+                            if (Run.Count > 0)
+                                randomCell = Run[Random.Range(0, Run.Count)];
+                            else
+                                randomCell = currentCell;
+
+                            RemoveWall(randomCell.northWall);
+
+                            //End the run
+                            Run.Clear();
+                        }
+
+                        else
+                        {
+                            if (currentCell.CellIndex.y != 0)
+                            {
+                                RemoveWall(currentCell.eastWall);
+                                Run.Add(currentCell);
+                            }
+                        }
+                    }
+
+                    currentCell.visited = true;
+                }
+            }
+        }
+    }
+
+    public IEnumerator GenerateMazeStep(float stepSpeed)
+    {
+        int start = (Cell.Maze.Count) - Grid.cellCountX;
+
+        //start at the first cell in the western most column
+        for (int i = 0; i < Grid.cellCountY; i++)
+        {
+            //go through the grid row by row
+            for (int j = start; j > -4; j -= Grid.cellCountX)
+            {
+                Debug.Log(j + i);
+                Cell currentCell = Cell.Maze[j + i];
+
+                // go through and remove each wall
+                int toRemove = Random.Range(0, 101);
+                if (currentCell.visited == false)
+                {
+                    //If we are at the end of a row we close the run or we randomly close the run.
+                    if (currentCell.CellIndex.y == 0 && currentCell.CellIndex.x != 0)
+                    {
                         currentCell.eastWall.GetComponent<MeshRenderer>().material.color = Color.red;
-                        Run.Add(currentCell);
                         yield return new WaitForSeconds(stepSpeed);
                         RemoveWall(currentCell.eastWall);
                     }
                     else
                     {
-                        //remove a north wall from a random cell in the run
-                        if (Run.Count > 0)
+                        if (currentCell.CellIndex.x == 0 && currentCell.CellIndex.y != 0 || currentCell.CellIndex.y != 0 && toRemove < 50)
                         {
-                            Debug.Log("Carving Random north");
-                            Cell randomCell = Run[Random.Range(0, Run.Count)];
+                            Cell randomCell;
+
+                            if (Run.Count > 0)
+                                randomCell = Run[Random.Range(0, Run.Count)];
+                            else
+                                randomCell = currentCell;
+
                             randomCell.northWall.GetComponent<MeshRenderer>().material.color = Color.red;
                             yield return new WaitForSeconds(stepSpeed);
                             RemoveWall(randomCell.northWall);
@@ -75,23 +110,23 @@ public class SidewinderMazeAlgorithm : IMazeAlgorithm
                             //End the run
                             Run.Clear();
                         }
-                        //else
-                        //{
-                        //    Debug.Log("Carving north");
-                        //    currentCell.northWall.GetComponent<MeshRenderer>().material.color = Color.red;
-                        //    Run.Add(currentCell);
-                        //    yield return new WaitForSeconds(stepSpeed);
-                        //    RemoveWall(currentCell.northWall);
-                        //}
 
+                        else
+                        {
+                            if(currentCell.CellIndex.y != 0)
+                            {
+                                currentCell.eastWall.GetComponent<MeshRenderer>().material.color = Color.red;
+                                yield return new WaitForSeconds(stepSpeed);
+                                RemoveWall(currentCell.eastWall);
+                                Run.Add(currentCell);
+                            }
+                        }
                     }
-                }
 
-                currentCell.visited = true;
+                    currentCell.visited = true;
+                }
             }
         }
-
-        yield return new WaitForSeconds(stepSpeed);
     }
 
     public void RemoveWall(GameObject wall)
