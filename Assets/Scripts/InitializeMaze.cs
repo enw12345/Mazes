@@ -17,7 +17,7 @@ public class InitializeMaze : MonoBehaviour
     private Bounds wallBounds;
     private Vector3 planeCenter;
 
-    public enum MazeTypes { Binary, Sidewinder };
+    public enum MazeTypes { Binary, Sidewinder, AldousBroder };
     public MazeTypes mazeTypes;
 
     private IMazeAlgorithm mazeAlgorithm;
@@ -68,9 +68,13 @@ public class InitializeMaze : MonoBehaviour
         {
             mazeAlgorithm = new BinaryMazeAlgorithm();
         }
-        else if(mazeTypes == MazeTypes.Sidewinder)
+        else if (mazeTypes == MazeTypes.Sidewinder)
         {
             mazeAlgorithm = new SidewinderMazeAlgorithm();
+        }
+        else if (mazeTypes == MazeTypes.AldousBroder)
+        {
+            mazeAlgorithm = new AldousBroderAlgorithm();
         }
     }
 }

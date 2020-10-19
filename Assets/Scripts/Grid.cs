@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public static class Grid
 {
-    public static  int cellCountX = 2;
+    public static int cellCountX = 2;
     public static int cellCountY = 2;
 
     private static Vector3 horizontalRot = new Vector3(0, 90, 0);

@@ -270,7 +270,7 @@ MonoBehaviour:
   wallContainer: {fileID: 419700483}
   wall: {fileID: 4189424659764275432, guid: 57c320cdd9bdbb44e8c5eb5fd5fd059d, type: 3}
   plane: {fileID: 1042803125}
-  mazeTypes: 1
+  mazeTypes: 2
 --- !u!4 &458037735
 Transform:
   m_ObjectHideFlags: 0
@@ -330,7 +330,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}

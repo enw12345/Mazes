@@ -21,10 +21,10 @@ public class BinaryMazeAlgorithm : IMazeAlgorithm
 
             if (!currentCell.visited)
             {
-                if (currentCell.CellIndex.x == 0)
+                if (currentCell.CellPos.x == 0)
                     RemoveWall(currentCell.eastWall);
 
-                else if (currentCell.CellIndex.y == 0)
+                else if (currentCell.CellPos.y == 0)
                     RemoveWall(currentCell.northWall);
 
                 else
@@ -51,14 +51,14 @@ public class BinaryMazeAlgorithm : IMazeAlgorithm
 
             if (!currentCell.visited)
             {
-                if (currentCell.CellIndex.x == 0)
+                if (currentCell.CellPos.x == 0)
                 {
                     currentCell.eastWall.GetComponent<MeshRenderer>().material.color = Color.red;
                     yield return new WaitForSeconds(stepSpeed);
                     RemoveWall(currentCell.eastWall);
                 }
 
-                else if (currentCell.CellIndex.y == 0)
+                else if (currentCell.CellPos.y == 0)
                 {
                     currentCell.northWall.GetComponent<MeshRenderer>().material.color = Color.red;
                     yield return new WaitForSeconds(stepSpeed);

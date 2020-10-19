@@ -5,16 +5,28 @@ public class Cell
 {
     public int cellRow;
     public int cellColumn;
-    private Vector2 cellIndex;
+    private Vector2 cellPos;
+    private bool isPosSet = false;
     private bool isIndexSet = false;
+    private int cellIndex;
 
-    public Vector2 CellIndex
+    public int CellIndex
     {
         get
         {
             if (!isIndexSet)
                 SetIndex();
             return cellIndex;
+        }
+    }
+
+    public Vector2 CellPos
+    {
+        get
+        {
+            if (!isPosSet)
+                SetPos();
+            return cellPos;
         }
     }
 
@@ -37,9 +49,15 @@ public class Cell
 
     public static List<Cell> Maze = new List<Cell>();
 
+    private void SetPos()
+    {
+        cellPos = new Vector2(cellColumn, cellRow);
+        isIndexSet = true;
+    }
+
     private void SetIndex()
     {
-        cellIndex = new Vector2(cellColumn, cellRow);
+        cellIndex = Grid.cellCountX * cellRow + cellColumn;
         isIndexSet = true;
     }
 
