@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
 /// <summary>
@@ -21,74 +22,71 @@ class AldousBroderAlgorithm : IMazeAlgorithm
     public IEnumerator GenerateMazeStep(float stepSpeed)
     {
         int unvisitedCells = Cell.Maze.Count - 1;
-        Debug.Log("Unvisted Cells Start: " + unvisitedCells);
-        Cell currentCell;
 
         //select a random cell
-        Cell startCell = Cell.Maze[Random.Range(0, Cell.Maze.Count)];
-        currentCell = startCell;
+        Cell currentCell = Cell.Maze[Random.Range(0, Cell.Maze.Count)];
 
         //The algorithm runs until all of the cells have been visited
         while (unvisitedCells != 0)
         {
-            List<int> neighborCellsIndex = new List<int>();
+            List<int> neighborCells = new List<int>();
 
             if (!currentCell.visited)
             {
                 currentCell.visited = true;
                 unvisitedCells--;
 
-                int southNeighborIndex = currentCell.CellIndex + 1;
-                int northNeighborIndex = currentCell.CellIndex - 1;
-                int westNeighborIndex = currentCell.CellIndex + Grid.cellCountY;
-                int eastNeighborIndex = currentCell.CellIndex - Grid.cellCountY;
+                int southernNeighbor = currentCell.CellIndex + 1;
+                int northernNeighbor = currentCell.CellIndex - 1;
+                int easternNeighbor = currentCell.CellIndex - Grid.cellCountY;
+                int westernNeighbor = currentCell.CellIndex + Grid.cellCountY;
+                int gridSize = Grid.cellCountX * Grid.cellCountY;
 
-                if (currentCell.CellPos.y < Grid.cellCountY - 1)
+                if (currentCell.cellRow != Grid.cellCountY - 1)
                 {
-                    neighborCellsIndex.Add(southNeighborIndex);
+                    if (southernNeighbor > 0 && southernNeighbor < gridSize)
+                        neighborCells.Add(southernNeighbor);
                 }
-                else if (currentCell.CellPos.y > 0)
+                if (currentCell.cellRow != 0)
                 {
-                    neighborCellsIndex.Add(northNeighborIndex);
+                    if (northernNeighbor > 0 && northernNeighbor < gridSize)
+                        neighborCells.Add(northernNeighbor);
                 }
-                else if (currentCell.CellPos.x < Grid.cellCountX - 1)
+                if (currentCell.cellColumn != 0)
                 {
-                    neighborCellsIndex.Add(westNeighborIndex);
+                    if (easternNeighbor > 0 && easternNeighbor < gridSize)
+                        neighborCells.Add(easternNeighbor);
                 }
-                else if (currentCell.CellPos.x > 0)
+                if (currentCell.cellColumn != Grid.cellCountX - 1)
                 {
-                    neighborCellsIndex.Add(eastNeighborIndex);
+                    if (westernNeighbor > 0 && westernNeighbor < gridSize)
+                        neighborCells.Add(westernNeighbor);
                 }
 
-                Debug.Log(currentCell.CellIndex + " cell has " + neighborCellsIndex.Count + " neighbor cells.");
-
-                int index = neighborCellsIndex[Random.Range(0, neighborCellsIndex.Count)];
-                neighborCellsIndex.Clear();
-                Debug.Log(index);
+                int index = neighborCells[Random.Range(0, neighborCells.Count)];
+                neighborCells.Clear();
 
                 Cell neighborCell = Cell.Maze[index];
 
-                Debug.Log("Current cell: " + currentCell.CellIndex + " Neighbor Cell: " + neighborCell.CellIndex);
-
-                if (neighborCell.CellIndex == southNeighborIndex)
+                if (neighborCell.CellIndex == southernNeighbor)
                 {
                     neighborCell.northWall.GetComponent<MeshRenderer>().material.color = Color.red;
                     yield return new WaitForSeconds(stepSpeed);
                     RemoveWall(neighborCell.northWall);
                 }
-                else if (neighborCell.CellIndex == northNeighborIndex)
+                else if (neighborCell.CellIndex == northernNeighbor)
                 {
                     currentCell.northWall.GetComponent<MeshRenderer>().material.color = Color.red;
                     yield return new WaitForSeconds(stepSpeed);
                     RemoveWall(currentCell.northWall);
                 }
-                else if (neighborCell.CellIndex == westNeighborIndex)
+                else if (neighborCell.CellIndex == westernNeighbor)
                 {
                     neighborCell.eastWall.GetComponent<MeshRenderer>().material.color = Color.red;
                     yield return new WaitForSeconds(stepSpeed);
                     RemoveWall(neighborCell.eastWall);
                 }
-                else if (neighborCell.CellIndex == eastNeighborIndex)
+                else if (neighborCell.CellIndex == easternNeighbor)
                 {
                     currentCell.eastWall.GetComponent<MeshRenderer>().material.color = Color.red;
                     yield return new WaitForSeconds(stepSpeed);
@@ -108,25 +106,6 @@ class AldousBroderAlgorithm : IMazeAlgorithm
     public void RemoveWall(GameObject wall)
     {
         wall.SetActive(false);
-    }
-
-    private bool AreAllCellsVisited()
-    {
-        int unvisitedCells = 0;
-
-        for (int i = 0; i < Cell.Maze.Count - 1; i++)
-        {
-            Cell currentCell = Cell.Maze[i];
-            if (currentCell.visited)
-                unvisitedCells--;
-            else
-                unvisitedCells++;
-        }
-
-        if (unvisitedCells == 0)
-            return true;
-        else
-            return false;
     }
 }
 

@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class InitializeMaze : MonoBehaviour
 {
-    public float stepSpeed = .1f;
     public bool step;
+    public float stepSpeed = .1f;
 
     [Range(2, 10)]
     public int sizeX = 4;

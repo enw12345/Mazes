@@ -30,13 +30,13 @@ public class SidewinderMazeAlgorithm : IMazeAlgorithm
                 if (currentCell.visited == false)
                 {
                     //If we are at the end of a row we close the run or we randomly close the run.
-                    if (currentCell.CellPos.y == 0 && currentCell.CellPos.x != 0)
+                    if (currentCell.cellRow == 0 && currentCell.cellColumn != 0)
                     {
                         RemoveWall(currentCell.eastWall);
                     }
                     else
                     {
-                        if (currentCell.CellPos.x == 0 && currentCell.CellPos.y != 0 || currentCell.CellPos.y != 0 && toRemove < 50)
+                        if (currentCell.cellColumn == 0 && currentCell.cellRow != 0 || currentCell.cellRow != 0 && toRemove < 50)
                         {
                             Cell randomCell;
 
@@ -53,7 +53,7 @@ public class SidewinderMazeAlgorithm : IMazeAlgorithm
 
                         else
                         {
-                            if (currentCell.CellPos.y != 0)
+                            if (currentCell.cellRow != 0)
                             {
                                 RemoveWall(currentCell.eastWall);
                                 Run.Add(currentCell);
@@ -84,7 +84,7 @@ public class SidewinderMazeAlgorithm : IMazeAlgorithm
                 if (currentCell.visited == false)
                 {
                     //If we are at the end of a row we close the run or we randomly close the run.
-                    if (currentCell.CellPos.y == 0 && currentCell.CellPos.x != 0)
+                    if (currentCell.cellRow == 0 && currentCell.cellColumn != 0)
                     {
                         currentCell.eastWall.GetComponent<MeshRenderer>().material.color = Color.red;
                         yield return new WaitForSeconds(stepSpeed);
@@ -92,7 +92,7 @@ public class SidewinderMazeAlgorithm : IMazeAlgorithm
                     }
                     else
                     {
-                        if (currentCell.CellPos.x == 0 && currentCell.CellPos.y != 0 || currentCell.CellPos.y != 0 && toRemove < 50)
+                        if (currentCell.cellColumn == 0 && currentCell.cellRow != 0 || currentCell.cellRow != 0 && toRemove < 50)
                         {
                             Cell randomCell;
 
@@ -111,7 +111,7 @@ public class SidewinderMazeAlgorithm : IMazeAlgorithm
 
                         else
                         {
-                            if(currentCell.CellPos.y != 0)
+                            if(currentCell.cellRow != 0)
                             {
                                 currentCell.eastWall.GetComponent<MeshRenderer>().material.color = Color.red;
                                 yield return new WaitForSeconds(stepSpeed);

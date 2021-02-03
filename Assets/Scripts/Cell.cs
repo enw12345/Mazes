@@ -57,7 +57,7 @@ public class Cell
 
     private void SetIndex()
     {
-        cellIndex = Grid.cellCountX * cellRow + cellColumn;
+        cellIndex = Grid.cellCountX * cellColumn + cellRow;
         isIndexSet = true;
     }
 
